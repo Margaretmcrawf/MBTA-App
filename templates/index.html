@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>
-         Nearest Stop
-      </title>
+      <title>Nearest Stop</title>
+      <link rel="stylesheet" type="text/css" href="/css/main.css">
    </head>
-<body>
-   <h1>Enter your location and learn where the nearest MBTA stop is.</h1>
-   <form action="/neareststop" method="post">
-      Location <br>
-      <input type="text" name="location"><br>
-      <input type="submit" value="Submit">
-   </form>
-</body>
+   <body>
+      <div class="titl">
+         <h1>Stop Finder</h1>
+      </div>
+      <p>Enter a location to find the nearest MBTA stop.</p>
+      <form action="/neareststop" method="post">
+         Location <br>
+         <input type="text" name="location:"><br>
+         <input type="submit" value="Submit">
+      </form>
+   </body>
 </html>

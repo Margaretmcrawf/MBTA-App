@@ -1,0 +1,22 @@
+body {
+    margin: 0px auto;
+    width: 100%;
+}
+
+div.titl {
+	background-color: black;
+}
+
+div.titl h1{
+	font-family: 'Candara', 'Calibri', 'Segoe', 'Segoe UI', 'Optima', Arial, sans-serif;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 2em;
+    color: black;
+}
+
+p {
+	font-size: 1.5em;
+    line-height: 1.4em;
+    color: black;
+}

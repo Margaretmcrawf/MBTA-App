@@ -56,7 +56,6 @@ def get_lat_long(place_name):
     longitude = response_data[u'results'][0][u'geometry'][u'location'][u'lng']
     return (latitude, longitude)
 
-
 def get_nearest_station(latitude, longitude):
     """
     Given latitude and longitude strings, return a (station_name, distance)
