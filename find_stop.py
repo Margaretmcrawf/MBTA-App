@@ -102,15 +102,20 @@ def login():
     if request.method == 'POST':
         location = request.form['location']
         if location != '':
-            (stop_name, distance) = find_stop_near(location)
-            (lat1,lon1,lat2,lon2) = get_lat_long(location) + get_lat_long(stop_name)
-            imgurl = get_gmaps_image_url(lat1,lon1,lat2,lon2)
-            return render_template('neareststop.html', stop_name=stop_name, distance=distance, imgurl=imgurl)
+            try: 
+                (stop_name, distance) = find_stop_near(location)
+                (lat1,lon1,lat2,lon2) = get_lat_long(location) + get_lat_long(stop_name)
+                imgurl = get_gmaps_image_url(lat1,lon1,lat2,lon2)
+                return render_template('neareststop.html', stop_name=stop_name, distance=distance, imgurl=imgurl)
+            except IndexError:
+                error='Error: Too far from MBTA Station'
         else:
             error = 'Error: Please fill out all fields'
     # the code below is executed if the login is invalid or the fields aren't
     #filled out
     return render_template('error.html', error=error)
+
+get_mbta_url(37.7740, -122.4313)
 
 if __name__ == '__main__':
     app.run()
