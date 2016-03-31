@@ -13,18 +13,26 @@ app = Flask(__name__)
 
 GMAPS_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 GMAPS_API_KEY = "AIzaSyBAbkJTjX3Vk0eorBNKFAlIlbyH7NC4frg"
+GMAPS_VISUAL_BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?"
+GMAPS_VISUAL_API_KEY = "AIzaSyDre5VD6f7XBiQfZ1u-LghIyPgOmxkjBqM"
 MBTA_BASE_URL = "http://realtime.mbta.com/developer/api/v2/stopsbylocation"
 MBTA_DEMO_API_KEY = "wX9NwuHnZU2ToO7GmGR9uw"
+
 
 def get_gmaps_url(location):
     """
     Gives the url needed for the Google Maps API for a given location.
     """
     url = GMAPS_BASE_URL + '?address='
+    location = location.replace('@', '')
     words = location.split(' ')
     for word in words[0:-1]:
         url = url + word + '%20'
-    url = url + words[-1] + '&key=' + GMAPS_API_KEY
+    url = url + words[-1] + '&bounds=42.40082,71.191155|42.40082,-70.748802''&key=' + GMAPS_API_KEY
+    return url
+
+def get_gmaps_image_url(lat1, lon1, lat2, lon2):
+    url = GMAPS_VISUAL_BASE_URL + 'size=640x640&markers=color:red|' + str(lat1) + ',' + str(lon1) + '&markers=color:green|' + str(lat2) + ',' + str(lon2) + '&key=' + GMAPS_VISUAL_API_KEY
     return url
 
 def get_mbta_url(lat, lon):
@@ -95,7 +103,9 @@ def login():
         location = request.form['location']
         if location != '':
             (stop_name, distance) = find_stop_near(location)
-            return render_template('neareststop.html', stop_name=stop_name, distance=distance)
+            (lat1,lon1,lat2,lon2) = get_lat_long(location) + get_lat_long(stop_name)
+            imgurl = get_gmaps_image_url(lat1,lon1,lat2,lon2)
+            return render_template('neareststop.html', stop_name=stop_name, distance=distance, imgurl=imgurl)
         else:
             error = 'Error: Please fill out all fields'
     # the code below is executed if the login is invalid or the fields aren't
