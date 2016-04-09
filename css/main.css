@@ -4,7 +4,7 @@ body {
 }
 
 div.titl {
-	background-color: black;
+	background-color: #ADD8E6;
 }
 
 div.titl h1{
@@ -13,10 +13,13 @@ div.titl h1{
     font-weight: bold;
     font-size: 2em;
     color: black;
+    text-align: center;
 }
 
 p {
+	font-family: 'Candara', 'Calibri', 'Segoe', 'Segoe UI', 'Optima', Arial, sans-serif;
 	font-size: 1.5em;
     line-height: 1.4em;
     color: black;
+    text-align: center;
 }
